@@ -2,7 +2,7 @@ var userList = [];
 
 function findSoulmates(){
     var tableRows = $("#spreadsheet").contents().find("body").html();
-    alert(JSON.stringify(tableRows));
+    Console.log(JSON.stringify(tableRows));
 }
 
 function getCompatibilityScore(user1,user2) {
