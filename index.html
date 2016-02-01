@@ -1,1 +1,39 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MyAnimeList Soulmate Finder</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="javascript/jquery.xdomainajax.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="javascript/scripts.js"></script>
+    </head>
+    <body>
+        <div class="container">
+                <div id = "left" class="col-md-6">
+                    <div>
+                        <p>
+                            Add your username to the spreadsheet via <a href="https://docs.google.com/forms/d/1-S5CqV5GpJKfuz98yW_RdMEz8mMryA4nX2mVZ8R2GnM/viewform">this</a> Google Form.
+                        </p>
+                        <p>
+                            Enter your MAL username here:
+                            <form>
+                                <input type="text" class="form-control" id="malUsername" placeholder="">
+                                <button id="submitButton" type="submit" class="btn btn-primary" onclick="findSoulmates();">Find My Soulmate!</button>
+                            </form>
+                        </p>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="results" class="table">
+                        </table>
+                    </div>
+                </div>
+                <div id = "right" class="col-md-6">
+                    <iframe id="spreadsheet" src="https://docs.google.com/spreadsheets/d/14sOjj8_pFvMm_ekbR9a8P_gsjDx4ONaO5fYDB02_Asw/pubhtml?gid=1282985650&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+                </div>
+        </div>
+    </body>
+</html>
