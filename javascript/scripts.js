@@ -1,8 +1,14 @@
 var userList = [];
 
 function findSoulmates(){
-    var tableRows = $("#spreadsheet").contents().find("body").html();
-    Console.log(JSON.stringify(tableRows));
+    $.get({
+        url: "https://docs.google.com/spreadsheets/d/14sOjj8_pFvMm_ekbR9a8P_gsjDx4ONaO5fYDB02_Asw/pubhtml?gid=1282985650&single=true",
+        success: function(data){
+            var html = $.parseHTML(data);
+            var tableData = $(html).find("td");
+            Console.log(JSON.stringify(tableData));
+        }
+    });
 }
 
 function getCompatibilityScore(user1,user2) {
