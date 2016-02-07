@@ -5,11 +5,16 @@ function findSoulmates(){
             var tableData = $(data.responseText).find('td');
             var userList = [];
             $.each(tableData,function(i,data){
-                if(i>1)
-                    userList.push($(data).text());
+                if(i>1){
+                    var user = $(data).text();
+                    if(userList.indexOf(user)==-1)
+                        userList.push(user);
+                }
             });
             $('#results > tbody').html("");
             $('#results').show();
+            $('#counter').html("0/"+userList.length + " users processed.");
+            $('#counter').show();
             $.each(userList,function(i,user){
                 var thisUser = $('#malUsername').val();
                 var isLast = (i == userList.length-1);
@@ -52,8 +57,13 @@ function getCompatibilityScore(user1,user2,isLast) {
                 $('#results > tbody:last-child').append('<tr><td><a href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
                                                             compatibility + '</td><td>' + 
                                                             totalShared + '</td>');
+                var counterText = $('#counter').text();
+                var numProcessed = Number(counterText.substring(0,counterText.indexOf("/")));
+                var tailText = counterText.substring(counterText.indexOf("/"));
+                $('#counter').html((numProcessed+1)+tailText);
                 if(isLast){
                     $('#results').DataTable();
+                    $('#counter').hide();
                 }
             }
         });
