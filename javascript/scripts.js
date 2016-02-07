@@ -43,7 +43,7 @@ function getCompatibilityScore(user1,user2,isLast) {
                 var averageUser2 = extracted.substring(0,extracted.indexOf("<"));//get second number
                 extracted = extracted.substring(extracted.indexOf("border")+13);//get rid of useless part
                 var meanDifference = extracted.substring(0,extracted.indexOf("<"));//get last number
-                $('#results > tbody:last-child').append('<tr><td>' + user1 + '</td><td>' + 
+                $('#results > tbody:last-child').append('<tr><td><a href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
                                                             calculateCompatibility(totalShared, averageUser1, averageUser2, meanDifference) + '</td><td>' + 
                                                             totalShared + '</td><td>');
                 if(isLast){
