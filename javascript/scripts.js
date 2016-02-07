@@ -43,20 +43,29 @@ function getCompatibilityScore(user1,user2,isLast) {
                 var averageUser2 = extracted.substring(0,extracted.indexOf("<"));//get second number
                 extracted = extracted.substring(extracted.indexOf("border")+13);//get rid of useless part
                 var meanDifference = extracted.substring(0,extracted.indexOf("<"));//get last number
+                
+                var compatibility = calculateCompatibility(totalShared, averageUser1, averageUser2, meanDifference);
+                if(isNaN(totalShared)){
+                    totalShared = 0;
+                    compatibility = -666;
+                }
                 $('#results > tbody:last-child').append('<tr><td><a href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
-                                                            calculateCompatibility(totalShared, averageUser1, averageUser2, meanDifference) + '</td><td>' + 
-                                                            totalShared + '</td><td>');
+                                                            compatibility + '</td><td>' + 
+                                                            totalShared + '</td>');
                 if(isLast){
-                    Sortable.initTable(document.querySelector('#results'));
+                    $('#results').DataTable();
                 }
             }
         });
 }
 
 function calculateCompatibility(total, average1, average2, meanDif){
-  //if(total<15){
-  //  return null;
-  //}
+  if(total<5){
+    return -666;
+  }
+  if(meanDif==null||average1=="-"){
+      return -666;
+  }
   if(meanDif==0){
     return 100;
   }

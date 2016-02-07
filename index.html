@@ -3,14 +3,14 @@
     <head>
         <title>MyAnimeList Soulmate Finder</title>
         <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/sortable-theme-bootstrap.css" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="javascript/jquery.xdomainajax.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="javascript/sortable.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
         <script src="javascript/scripts.js"></script>
     </head>
     <body>
@@ -30,12 +30,12 @@
                         </p>
                     </div>
                     <div class="table-responsive">
-                        <table id="results" class="sortable-theme-bootstrap" hidden=true data-sortable>
+                        <table id="results" class="display" cellspacing="0" width="100%" hidden=true >
                             <thead>
                                 <tr>
-                                    <th data-sortable-type="alpha">User</th>
-                                    <th data-sorted=true data-sortable-type="numeric">Compatibility</th>
-                                    <th data-sortable-type="numeric">Shared</th>
+                                    <th>User</th>
+                                    <th>Compatibility</th>
+                                    <th>Shared</th>
                                 </tr>
                             </thead>
                             <tbody>
