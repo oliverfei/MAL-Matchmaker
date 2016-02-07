@@ -8,24 +8,23 @@ function findSoulmates(){
                 if(i>1)
                     userList.push($(data).text());
             });
-            console.log("List of users: " + userList);
             $('#results > tbody').html("");
+            $('#results').show();
             $.each(userList,function(i,user){
                 var thisUser = $('#malUsername').val();
-                getCompatibilityScore(user, thisUser);
-            });
-            $('#results').show();
+                var isLast = (i == userList.length-1);
+                getCompatibilityScore(user, thisUser, isLast);
+            });        
         }
     });
 }
 
-function getCompatibilityScore(user1,user2) {
+function getCompatibilityScore(user1,user2,isLast) {
     if(user1!=user2)
         $.get({
             url: "http://myanimelist.net/shared.php?u1="+user1+"&u2="+user2,
             success: function(data){
                 var response = data.responseText;
-                console.log(response);
                 var index = response.indexOf(">Mean Value");
                 var extracted = response.substring(index+12, index+270); //section containing the relevant values
                 /*
@@ -47,6 +46,9 @@ function getCompatibilityScore(user1,user2) {
                 $('#results > tbody:last-child').append('<tr><td>' + user1 + '</td><td>' + 
                                                             calculateCompatibility(totalShared, averageUser1, averageUser2, meanDifference) + '</td><td>' + 
                                                             totalShared + '</td><td>');
+                if(isLast){
+                    Sortable.initTable(document.querySelector('#results'));
+                }
             }
         });
 }
@@ -58,5 +60,5 @@ function calculateCompatibility(total, average1, average2, meanDif){
   if(meanDif==0){
     return 100;
   }
-  return (1-(meanDif/4))*100;
+  return Number(((1-(meanDif/4))*100).toFixed(2));
 }
