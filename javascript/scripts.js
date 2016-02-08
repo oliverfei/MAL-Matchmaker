@@ -1,3 +1,6 @@
+var numProcessed = 0;
+var numUsers = 0;
+
 function findSoulmates(){
     var thisUser = $('#malUsername').val();
     $.get({
@@ -20,9 +23,9 @@ function generateTable(){
             var thisUser = $('#malUsername').val();
             $.each(tableData,function(i,data){
                 if(i>1){
-                    var user = $(data).text();
+                    var user = $(data).text().trim();
                     var index = userList.indexOf(user);
-                    if(index==-1||userList[index]!=user)
+                    if(index==-1)
                         userList.push(user);
                 }
             });
@@ -30,15 +33,16 @@ function generateTable(){
             $('#results').show();
             $('#counter').html("0/"+userList.length + " users processed.");
             $('#counter').show();
+            numUsers = userList.length;
+            numProcessed = 0;
             $.each(userList,function(i,user){
-                var isLast = (i == userList.length-1);
-                getCompatibilityScore(user, thisUser, isLast);
+                getCompatibilityScore(user, thisUser);
             });        
         }
     });
 }
 
-function getCompatibilityScore(user1,user2,isLast) {
+function getCompatibilityScore(user1,user2) {
     if(user1!=user2)
         $.get({
             url: "http://myanimelist.net/shared.php?u1="+user1+"&u2="+user2,
@@ -71,16 +75,20 @@ function getCompatibilityScore(user1,user2,isLast) {
                 $('#results > tbody:last-child').append('<tr><td><a href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
                                                             compatibility + '</td><td>' + 
                                                             totalShared + '</td>');
-                var counterText = $('#counter').text();
-                var numProcessed = Number(counterText.substring(0,counterText.indexOf("/")));
-                var tailText = counterText.substring(counterText.indexOf("/"));
-                $('#counter').html((numProcessed+1)+tailText);
-                if(isLast){
+                numProcessed++;
+                $('#counter').html(numProcessed + "/" + numUsers + " users have been processed.");
+                if(numProcessed==numUsers){
                     $('#results').DataTable();
                     $('#counter').hide();
                 }
+            },
+            error: function(xhr, status, error) {
+                numProcessed++;
+                console.log(user1);
             }
         });
+    else
+        numProcessed++;
 }
 
 function calculateCompatibility(total, average1, average2, meanDif){
