@@ -72,7 +72,7 @@ function getCompatibilityScore(user1,user2) {
                     totalShared = 0;
                     compatibility = -666;
                 }
-                $('#results > tbody:last-child').append('<tr><td><a href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
+                $('#results > tbody:last-child').append('<tr><td><a target="_blank" href = "http://myanimelist.net/profile/' + user1 + '">' + user1 + '</a>' + '</td><td>' + 
                                                             compatibility + '</td><td>' + 
                                                             totalShared + '</td>');
                 numProcessed++;
