@@ -1,13 +1,28 @@
 function findSoulmates(){
+    var thisUser = $('#malUsername').val();
+    $.get({
+       url: "http://myanimelist.net/profile/"+thisUser,
+       success: function(data){
+           if(data.responseText!="")
+               generateTable();
+           else
+               alert("That username does not exist!");
+       },
+    });
+}
+
+function generateTable(){
     $.get({
         url: "https://docs.google.com/spreadsheets/d/14sOjj8_pFvMm_ekbR9a8P_gsjDx4ONaO5fYDB02_Asw/pubhtml?gid=1282985650",
         success: function(data){
             var tableData = $(data.responseText).find('td');
             var userList = [];
+            var thisUser = $('#malUsername').val();
             $.each(tableData,function(i,data){
                 if(i>1){
                     var user = $(data).text();
-                    if(userList.indexOf(user)==-1)
+                    var index = userList.indexOf(user);
+                    if(index==-1||userList[index]!=user)
                         userList.push(user);
                 }
             });
@@ -16,7 +31,6 @@ function findSoulmates(){
             $('#counter').html("0/"+userList.length + " users processed.");
             $('#counter').show();
             $.each(userList,function(i,user){
-                var thisUser = $('#malUsername').val();
                 var isLast = (i == userList.length-1);
                 getCompatibilityScore(user, thisUser, isLast);
             });        
